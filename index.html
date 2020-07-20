@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="../../font-awesome-4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+    <section id="player">
+        <header class="header">
+            <h1>music player</h1>
+            <input v-model="inputValue" autofocus @keyup.enter="search" placeholder="请输入歌曲名..." class="search">
+            <button @click="search" class="search_btn">搜歌</button>
+        </header>
+        <section class="main" v-if="results.length>0">
+            <ul class="music-list">
+                <li class="music" v-for="(item,index) in results" :key="index">
+                    <div class="view">
+                        <span class="index">{{ index+1 }}. </span>
+                        <label class="music_name"> {{ item.name }}</label>
+                        <span class="play" @click="play(item.id)"><i class="fa fa-play-circle"></i></span>
+                        <label class="artist_name">{{ item.artists[0].name }}</label>
+                    </div>
+                </li>
+            </ul>
+        </section>
+        <footer class="footer">
+            <audio :src="url" autoplay controls></audio>
+        </footer>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./script.js"></script>
+</body>
+</html>
